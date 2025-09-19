@@ -52,6 +52,85 @@
             box-shadow: 0 8px 25px rgba(139,92,246,0.3);
         }
 
+        .navigation-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .breadcrumb-separator {
+            color: #cbd5e1;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-prev {
+            border-color: #e2e8f0;
+            color: #64748b;
+            background: white;
+        }
+
+        .nav-prev:hover {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+            transform: translateX(-2px);
+        }
+
+        .nav-next {
+            border-color: #8b5cf6;
+            color: white;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .nav-next:hover {
+            transform: translateX(2px);
+            box-shadow: 0 8px 25px rgba(139,92,246,0.3);
+        }
+
         h1 {
             font-size: 2.5rem;
             color: #8b5cf6;
@@ -433,6 +512,22 @@
         <div class="header">
             <h1>Regional AI Expansion Strategy</h1>
             <p class="subtitle">Strategic roadmap for AI implementation across Singapore → Hong Kong → India expansion with regulatory compliance frameworks, data residency considerations, and governance structures for multi-jurisdictional deployment</p>
+        </div>
+
+        <div class="navigation-bar">
+            <div class="breadcrumb">
+                <a href="../index.html">Overview</a>
+                <span class="breadcrumb-separator">></span>
+                <span>Regional Strategy</span>
+            </div>
+            <div class="nav-buttons">
+                <a href="two-week-discovery.html" class="nav-button nav-prev">
+                    ← Discovery Workshop
+                </a>
+                <a href="../index.html" class="nav-button nav-next">
+                    Back to Overview →
+                </a>
+            </div>
         </div>
 
         <div class="regional-map">

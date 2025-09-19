@@ -52,6 +52,85 @@
             box-shadow: 0 8px 25px rgba(16,185,129,0.3);
         }
 
+        .navigation-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #059669;
+        }
+
+        .breadcrumb-separator {
+            color: #cbd5e1;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-prev {
+            border-color: #e2e8f0;
+            color: #64748b;
+            background: white;
+        }
+
+        .nav-prev:hover {
+            border-color: #10b981;
+            color: #10b981;
+            transform: translateX(-2px);
+        }
+
+        .nav-next {
+            border-color: #10b981;
+            color: white;
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .nav-next:hover {
+            transform: translateX(2px);
+            box-shadow: 0 8px 25px rgba(16,185,129,0.3);
+        }
+
         h1 {
             font-size: 2.5rem;
             color: #10b981;
@@ -463,6 +542,22 @@
             <p class="subtitle">Interactive timeline and methodology for comprehensive discovery engagement integrating stakeholder alignment, team assessments, OrbusInfinity visualization, and prototype development with clear deliverables</p>
         </div>
 
+        <div class="navigation-bar">
+            <div class="breadcrumb">
+                <a href="../index.html">Overview</a>
+                <span class="breadcrumb-separator">></span>
+                <span>Discovery Workshop</span>
+            </div>
+            <div class="nav-buttons">
+                <a href="mizuho-use-cases.html" class="nav-button nav-prev">
+                    ← Strategic Use Cases
+                </a>
+                <a href="regional-expansion.html" class="nav-button nav-next">
+                    Regional Strategy →
+                </a>
+            </div>
+        </div>
+
         <div class="workshop-overview">
             <h2 style="color: #1e293b; margin-bottom: 20px; text-align: center;">Workshop Methodology Overview</h2>
             <p style="color: #64748b; text-align: center; margin-bottom: 30px; line-height: 1.8;">
@@ -772,6 +867,35 @@
                         <div class="method-title">Business Impact Validation</div>
                         <div class="method-desc">Comprehensive validation of business value propositions and technical feasibility through interactive demonstration enabling immediate stakeholder confidence building.</div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border-radius: 20px; padding: 40px; margin-bottom: 40px;">
+            <h2 style="margin-bottom: 20px; font-size: 1.8rem;">Assumptions for Success</h2>
+            <p style="margin-bottom: 30px; opacity: 0.95; line-height: 1.8;">
+                The following assumptions are critical for achieving the proposed timeline and deliverables. These represent industry best practices for enterprise AI implementations.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border-left: 4px solid rgba(255,255,255,0.3);">
+                    <div style="font-weight: 700; margin-bottom: 10px; font-size: 1rem;">⏱️ Timeline Dependencies</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; line-height: 1.6;">Timelines are best-case scenarios assuming timely access to key Mizuho stakeholders (people), defined processes, and required technical environments (tools). Delays in stakeholder availability may extend timeline accordingly.</div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border-left: 4px solid rgba(255,255,255,0.3);">
+                    <div style="font-weight: 700; margin-bottom: 10px; font-size: 1rem;">🔒 Data Requirements</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; line-height: 1.6;">All prototypes will be developed using synthetic or fully anonymized data provided by Mizuho. Success of the pilot phase depends on access to relevant, de-identified historical data for model validation.</div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border-left: 4px solid rgba(255,255,255,0.3);">
+                    <div style="font-weight: 700; margin-bottom: 10px; font-size: 1rem;">🏗️ Infrastructure Access</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; line-height: 1.6;">Workshop success requires access to relevant technical environments, existing screening systems documentation, and integration specifications for proof-of-concept development and validation.</div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border-left: 4px solid rgba(255,255,255,0.3);">
+                    <div style="font-weight: 700; margin-bottom: 10px; font-size: 1rem;">📋 Regulatory Alignment</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; line-height: 1.6;">All implementations will comply with MAS, HKMA, and RBI regulatory requirements. Any changes in regulatory landscape during engagement may require scope adjustments and timeline modifications.</div>
                 </div>
             </div>
         </div>

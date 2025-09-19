@@ -52,6 +52,85 @@
             box-shadow: 0 8px 25px rgba(220,38,38,0.3);
         }
 
+        .navigation-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #b91c1c;
+        }
+
+        .breadcrumb-separator {
+            color: #cbd5e1;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-prev {
+            border-color: #e2e8f0;
+            color: #64748b;
+            background: white;
+        }
+
+        .nav-prev:hover {
+            border-color: #dc2626;
+            color: #dc2626;
+            transform: translateX(-2px);
+        }
+
+        .nav-next {
+            border-color: #dc2626;
+            color: white;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .nav-next:hover {
+            transform: translateX(2px);
+            box-shadow: 0 8px 25px rgba(220,38,38,0.3);
+        }
+
         h1 {
             font-size: 2.5rem;
             color: #dc2626;
@@ -435,11 +514,27 @@
     <div class="container">
         <div class="header">
             <h1>Mizuho Strategic AI Use Cases</h1>
-            <p class="subtitle">Deep-dive into Sanctions Screening Precision AI and IT Operations Reliability AI - two strategic applications delivering immediate business value while establishing foundation capabilities for scalable AI adoption</p>
+            <p class="subtitle">Deep-dive into AI-Powered False Positive Reduction and IT Operations Reliability AI - two strategic applications that enhance existing systems while delivering immediate business value and establishing foundation capabilities for scalable AI adoption</p>
+        </div>
+
+        <div class="navigation-bar">
+            <div class="breadcrumb">
+                <a href="../index.html">Overview</a>
+                <span class="breadcrumb-separator">></span>
+                <span>Strategic Use Cases</span>
+            </div>
+            <div class="nav-buttons">
+                <a href="framework-visualization.html" class="nav-button nav-prev">
+                    ← 8-Step Framework
+                </a>
+                <a href="two-week-discovery.html" class="nav-button nav-next">
+                    Discovery Workshop →
+                </a>
+            </div>
         </div>
 
         <div class="use-case-tabs">
-            <button class="tab-button active" onclick="switchTab('sanctions')">Sanctions Screening AI</button>
+            <button class="tab-button active" onclick="switchTab('sanctions')">AI-Powered False Positive Reduction</button>
             <button class="tab-button" onclick="switchTab('operations')">IT Operations Reliability AI</button>
         </div>
 
@@ -448,10 +543,11 @@
             <div class="use-case-hero">
                 <div class="hero-content">
                     <div class="hero-icon sanctions-icon">🛡️</div>
-                    <h2 style="color: #dc2626; font-size: 2rem; margin-bottom: 20px;">Sanctions Screening Precision AI</h2>
+                    <h2 style="color: #dc2626; font-size: 2rem; margin-bottom: 20px;">AI-Powered False Positive Reduction for Sanctions Screening</h2>
                     <p style="font-size: 1.2rem; color: #64748b; line-height: 1.8;">
-                        Advanced machine learning algorithms to reduce false positive rates in sanctions screening while improving explainability and audit trail transparency.
-                        Designed to enhance rather than replace existing compliance frameworks with 70-85% false positive reduction and complete regulatory auditability.
+                        Financial institutions like Mizuho have invested in powerful screening engines (such as Informatica IIR or World Check). However, these systems are often tuned for maximum caution,
+                        leading to false positive rates as high as 95-98%. This creates a massive operational burden on L1 and L2 compliance analysts. Our AI solution sits on top of your existing engine,
+                        using advanced contextual analysis and machine learning to intelligently triage these alerts, allowing your team to focus only on the highest-risk cases.
                     </p>
                 </div>
             </div>
@@ -477,20 +573,42 @@
 
             <div class="demo-section">
                 <h3 style="color: #1e293b; margin-bottom: 20px;">Interactive Sanctions Screening Demo</h3>
-                <p style="color: #64748b; margin-bottom: 20px;">Experience how AI-enhanced sanctions screening processes synthetic transaction data with explainable decision-making</p>
+                <p style="color: #64748b; margin-bottom: 20px;">Experience how our AI layer processes alerts from existing screening engines, dramatically reducing false positives while maintaining complete transparency and audit trails for regulatory compliance</p>
 
                 <div class="demo-container">
                     <button class="demo-button" onclick="runSanctionsDemo()">Run Sanctions Screening Simulation</button>
                     <div id="sanctionsOutput" class="demo-output">
-                        <div class="demo-line info">🔍 Initializing Sanctions Screening AI Engine...</div>
-                        <div class="demo-line success">✅ Loading synthetic transaction dataset (1,000 transactions)</div>
-                        <div class="demo-line info">🧠 Applying ML algorithms: NLP Entity Recognition + Risk Scoring</div>
-                        <div class="demo-line warning">⚠️  Traditional Rule-based System: 950 flagged transactions (95% false positive rate)</div>
-                        <div class="demo-line success">✅ AI-Enhanced System: 142 flagged transactions (15% false positive rate)</div>
-                        <div class="demo-line success">📊 Improvement: 85% reduction in false positives</div>
-                        <div class="demo-line info">📋 Generating explainability reports for all flagged transactions...</div>
-                        <div class="demo-line success">✅ Audit trail generated with decision factors and confidence scores</div>
-                        <div class="demo-line success">🎯 Processing time reduced from 8 hours to 2 hours (75% improvement)</div>
+                        <div class="demo-line info">🔍 Initializing AI-Powered False Positive Reduction Engine...</div>
+                        <div class="demo-line success">✅ Connected to existing screening engine (World Check compatible)</div>
+                        <div class="demo-line info">📊 Processing batch: 1,000 synthetic transactions from existing engine</div>
+                        <div class="demo-line warning">⚠️  Existing Engine Output: 982 flagged alerts (98.2% preliminary rate)</div>
+                        <div class="demo-line info">🧠 Applying AI triage: Contextual analysis + ML risk scoring...</div>
+                        <div class="demo-line success">✅ AI-Enhanced Output: 147 high-confidence alerts (85% reduction)</div>
+                        <div class="demo-line info">📋 Sample High-Risk Alert (JSON):</div>
+                        <div class="demo-line" style="background: #2d3748; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace; font-size: 0.85rem; color: #e2e8f0;">
+{
+  "alertId": "MZH-SG-45892-2025",
+  "originalEngineFlag": true,
+  "aiConfidenceScore": 92.4,
+  "status": "ESCALATE_L2_REVIEW",
+  "entity": {
+    "name": "Jon R. Smit",
+    "type": "INDIVIDUAL",
+    "watchlistMatch": "Jonathan Smith (OFAC SDN)"
+  },
+  "riskFactors": [
+    "Phonetic match confidence: 94.2%",
+    "Transaction nexus: High-risk jurisdiction (3 transfers)",
+    "Known associate pattern detected",
+    "Historical sanctions evasion indicators"
+  ],
+  "recommendation": "IMMEDIATE_COMPLIANCE_REVIEW",
+  "explanation": "High-confidence match despite spelling variation",
+  "processingTime": "0.03 seconds",
+  "humanReviewRequired": true
+}</div>
+                        <div class="demo-line success">✅ Processing completed: 835 alerts auto-cleared with full audit trail</div>
+                        <div class="demo-line success">🎯 Analyst workload reduced by 85% while maintaining 100% compliance coverage</div>
                     </div>
                 </div>
             </div>
@@ -504,7 +622,7 @@
                 <div class="benefit-card">
                     <div class="benefit-icon">🔍</div>
                     <div class="benefit-title">Enhanced Precision</div>
-                    <div class="benefit-desc">Advanced NLP algorithms analyze entity names, addresses, and transaction descriptions with significantly higher accuracy than traditional rule-based systems.</div>
+                    <div class="benefit-desc">Our AI moves beyond simple rule-matching to understand complex challenges like nicknames (e.g., Peggy for Margaret), phonetic similarities (e.g., Smith vs. Smyth), and regional name variations (e.g., Jon vs. John), which are common pain points for traditional fuzzy-logic engines handling World Check's 1M+ names.</div>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">📊</div>
