@@ -795,7 +795,7 @@
     <div class="container">
         <div class="header">
             <h1>Mizuho Strategic AI Use Cases</h1>
-            <p class="subtitle">Deep-dive into AI-Powered False Positive Reduction and IT Operations Reliability AI - two strategic applications that enhance existing systems while delivering immediate business value and establishing foundation capabilities for scalable AI adoption</p>
+            <p class="subtitle">Deep-dive into AI-Assisted Name Screening (Sanctions Precision) and IT Operations Reliability AI (Ticketing Insight) - two strategic sandbox options designed to demonstrate measurable outcomes using synthetic data only, with governance, explainability, and MLOps discipline embedded from the start</p>
         </div>
 
         <div class="navigation-bar">
@@ -815,8 +815,8 @@
         </div>
 
         <div class="use-case-tabs">
-            <button class="tab-button active" onclick="switchTab('sanctions')">AI-Powered False Positive Reduction</button>
-            <button class="tab-button" onclick="switchTab('operations')">IT Operations Reliability AI</button>
+            <button class="tab-button active" onclick="switchTab('sanctions')">AI-Assisted Name Screening (Sanctions Precision)</button>
+            <button class="tab-button" onclick="switchTab('operations')">IT Operations Reliability AI (Ticketing Insight)</button>
         </div>
 
         <!-- Sanctions Screening AI Content -->
@@ -824,11 +824,11 @@
             <div class="use-case-hero">
                 <div class="hero-content">
                     <div class="hero-icon sanctions-icon">🛡️</div>
-                    <h2 style="color: #dc2626; font-size: 2rem; margin-bottom: 20px;">AI-Powered False Positive Reduction for Sanctions Screening</h2>
+                    <h2 style="color: #dc2626; font-size: 2rem; margin-bottom: 20px;">POC Option A: AI-Assisted Name Screening (Sanctions Precision)</h2>
                     <p style="font-size: 1.2rem; color: #64748b; line-height: 1.8;">
-                        Financial institutions like Mizuho have invested in powerful screening engines (such as Informatica IIR or World Check). However, these systems are often tuned for maximum caution,
-                        leading to false positive rates as high as 95-98%. This creates a massive operational burden on L1 and L2 compliance analysts. Our AI solution sits on top of your existing engine,
-                        using advanced contextual analysis and machine learning to intelligently triage these alerts, allowing your team to focus only on the highest-risk cases.
+                        <strong>Objective:</strong> Reduce the high false positive burden in sanctions and PEP screening while improving auditability and transparency.<br><br>
+                        <strong>Problem Context:</strong> Current systems generate over 95% false positives. Nicknames, phonetic variations, and localisation challenges increase complexity. Daily watchlist delta updates strain compliance teams. Legacy fuzzy logic engines (e.g., SSA-NAME3, IIR) tend to over-match.<br><br>
+                        <strong>Solution Approach:</strong> AI-driven fuzzy matching, alias mapping, and phonetic detection. Alias library expansion across cultures and languages. Delta refresh automation, continuously checking against KIV (Keep in View). Explainable scoring of every match, including alias/phonetic reason codes.
                     </p>
                 </div>
             </div>
@@ -840,7 +840,11 @@
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">40-60%</div>
-                    <div class="metric-label">Processing Efficiency Improvement</div>
+                    <div class="metric-label">Analyst Review Time Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">90%</div>
+                    <div class="metric-label">Faster Delta Processing</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">95%</div>
@@ -1054,10 +1058,11 @@
             <div class="use-case-hero">
                 <div class="hero-content">
                     <div class="hero-icon operations-icon">⚙️</div>
-                    <h2 style="color: #0078d4; font-size: 2rem; margin-bottom: 20px;">IT Operations Reliability AI</h2>
+                    <h2 style="color: #0078d4; font-size: 2rem; margin-bottom: 20px;">POC Option B: IT Operations Reliability AI (Ticketing Insight)</h2>
                     <p style="font-size: 1.2rem; color: #64748b; line-height: 1.8;">
-                        Intelligent monitoring and automated response capabilities to improve system resilience and reduce incident resolution time.
-                        Complements existing investments by developing bank-owned intellectual property for anomaly detection, incident prediction, and automated remediation guidance.
+                        <strong>Objective:</strong> Improve infrastructure and application resilience by detecting anomalies, clustering incidents, and accelerating resolution.<br><br>
+                        <strong>Problem Context:</strong> High Mean Time to Detect (MTTD) and Mean Time to Resolve (MTTR). Large volumes of repetitive or duplicate tickets. Manual triage leads to inefficiencies and delays.<br><br>
+                        <strong>Solution Approach:</strong> AI-driven clustering of incidents to identify common root causes. Anomaly detection on ticket volumes and patterns. Automated "next best action" suggestions based on resolution history.
                     </p>
                 </div>
             </div>
@@ -1072,8 +1077,8 @@
                     <div class="metric-label">Incident Resolution Time Reduction</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">20-30%</div>
-                    <div class="metric-label">Proactive Issue Prevention</div>
+                    <div class="metric-value">25-35%</div>
+                    <div class="metric-label">Recurring Incidents Reduction</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">99.9%</div>
