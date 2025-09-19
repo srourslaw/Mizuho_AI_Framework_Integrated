@@ -334,6 +334,36 @@
         .error { color: #ef4444; }
         .info { color: #3b82f6; }
 
+        /* JSON Syntax Highlighting */
+        .json-container {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            border: 1px solid #334155;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .json-key { color: #60a5fa; font-weight: 600; }
+        .json-string { color: #34d399; }
+        .json-number { color: #fbbf24; }
+        .json-boolean { color: #f472b6; }
+        .json-null { color: #94a3b8; }
+        .json-bracket { color: #e2e8f0; font-weight: bold; }
+        .json-comma { color: #94a3b8; }
+        .json-colon { color: #94a3b8; }
+
+        .example-label {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 20px 0 5px 0;
+        }
+
         .implementation-roadmap {
             background: white;
             border-radius: 20px;
@@ -584,29 +614,81 @@
                         <div class="demo-line warning">⚠️  Existing Engine Output: 982 flagged alerts (98.2% preliminary rate)</div>
                         <div class="demo-line info">🧠 Applying AI triage: Contextual analysis + ML risk scoring...</div>
                         <div class="demo-line success">✅ AI-Enhanced Output: 147 high-confidence alerts (85% reduction)</div>
-                        <div class="demo-line info">📋 Sample High-Risk Alert (JSON):</div>
-                        <div class="demo-line" style="background: #2d3748; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace; font-size: 0.85rem; color: #e2e8f0;">
-{
-  "alertId": "MZH-SG-45892-2025",
-  "originalEngineFlag": true,
-  "aiConfidenceScore": 92.4,
-  "status": "ESCALATE_L2_REVIEW",
-  "entity": {
-    "name": "Jon R. Smit",
-    "type": "INDIVIDUAL",
-    "watchlistMatch": "Jonathan Smith (OFAC SDN)"
-  },
-  "riskFactors": [
-    "Phonetic match confidence: 94.2%",
-    "Transaction nexus: High-risk jurisdiction (3 transfers)",
-    "Known associate pattern detected",
-    "Historical sanctions evasion indicators"
-  ],
-  "recommendation": "IMMEDIATE_COMPLIANCE_REVIEW",
-  "explanation": "High-confidence match despite spelling variation",
-  "processingTime": "0.03 seconds",
-  "humanReviewRequired": true
-}</div>
+                        <div class="demo-line info">📋 Sample AI-Enhanced Alert Examples:</div>
+
+                        <div class="example-label">🚨 High-Risk Alert (Escalation Required):</div>
+                        <div class="json-container">
+<span class="json-bracket">{</span>
+  <span class="json-key">"alertId"</span><span class="json-colon">:</span> <span class="json-string">"MZH-SG-45892-2025"</span><span class="json-comma">,</span>
+  <span class="json-key">"originalEngineFlag"</span><span class="json-colon">:</span> <span class="json-boolean">true</span><span class="json-comma">,</span>
+  <span class="json-key">"aiConfidenceScore"</span><span class="json-colon">:</span> <span class="json-number">92.4</span><span class="json-comma">,</span>
+  <span class="json-key">"status"</span><span class="json-colon">:</span> <span class="json-string">"ESCALATE_L2_REVIEW"</span><span class="json-comma">,</span>
+  <span class="json-key">"entity"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"name"</span><span class="json-colon">:</span> <span class="json-string">"Jon R. Smit"</span><span class="json-comma">,</span>
+    <span class="json-key">"type"</span><span class="json-colon">:</span> <span class="json-string">"INDIVIDUAL"</span><span class="json-comma">,</span>
+    <span class="json-key">"watchlistMatch"</span><span class="json-colon">:</span> <span class="json-string">"Jonathan Smith (OFAC SDN)"</span>
+  <span class="json-bracket">}</span><span class="json-comma">,</span>
+  <span class="json-key">"riskFactors"</span><span class="json-colon">:</span> <span class="json-bracket">[</span>
+    <span class="json-string">"Phonetic match confidence: 94.2%"</span><span class="json-comma">,</span>
+    <span class="json-string">"Transaction nexus: High-risk jurisdiction (3 transfers)"</span><span class="json-comma">,</span>
+    <span class="json-string">"Known associate pattern detected"</span><span class="json-comma">,</span>
+    <span class="json-string">"Historical sanctions evasion indicators"</span>
+  <span class="json-bracket">]</span><span class="json-comma">,</span>
+  <span class="json-key">"recommendation"</span><span class="json-colon">:</span> <span class="json-string">"IMMEDIATE_COMPLIANCE_REVIEW"</span><span class="json-comma">,</span>
+  <span class="json-key">"explanation"</span><span class="json-colon">:</span> <span class="json-string">"High-confidence match despite spelling variation"</span><span class="json-comma">,</span>
+  <span class="json-key">"processingTime"</span><span class="json-colon">:</span> <span class="json-string">"0.03 seconds"</span><span class="json-comma">,</span>
+  <span class="json-key">"humanReviewRequired"</span><span class="json-colon">:</span> <span class="json-boolean">true</span>
+<span class="json-bracket">}</span>
+                        </div>
+
+                        <div class="example-label">⚠️ Medium-Risk Alert (Auto-Triaged for Review):</div>
+                        <div class="json-container">
+<span class="json-bracket">{</span>
+  <span class="json-key">"alertId"</span><span class="json-colon">:</span> <span class="json-string">"MZH-HK-23451-2025"</span><span class="json-comma">,</span>
+  <span class="json-key">"originalEngineFlag"</span><span class="json-colon">:</span> <span class="json-boolean">true</span><span class="json-comma">,</span>
+  <span class="json-key">"aiConfidenceScore"</span><span class="json-colon">:</span> <span class="json-number">67.8</span><span class="json-comma">,</span>
+  <span class="json-key">"status"</span><span class="json-colon">:</span> <span class="json-string">"QUEUE_L1_REVIEW"</span><span class="json-comma">,</span>
+  <span class="json-key">"entity"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"name"</span><span class="json-colon">:</span> <span class="json-string">"Ahmed Al-Rahman Corp"</span><span class="json-comma">,</span>
+    <span class="json-key">"type"</span><span class="json-colon">:</span> <span class="json-string">"CORPORATE"</span><span class="json-comma">,</span>
+    <span class="json-key">"watchlistMatch"</span><span class="json-colon">:</span> <span class="json-string">"Al Rahman Trading (EU Sanctions)"</span>
+  <span class="json-bracket">}</span><span class="json-comma">,</span>
+  <span class="json-key">"riskFactors"</span><span class="json-colon">:</span> <span class="json-bracket">[</span>
+    <span class="json-string">"Similar business name pattern"</span><span class="json-comma">,</span>
+    <span class="json-string">"Different jurisdiction registration"</span><span class="json-comma">,</span>
+    <span class="json-string">"No direct ownership links found"</span>
+  <span class="json-bracket">]</span><span class="json-comma">,</span>
+  <span class="json-key">"recommendation"</span><span class="json-colon">:</span> <span class="json-string">"STANDARD_DUE_DILIGENCE"</span><span class="json-comma">,</span>
+  <span class="json-key">"explanation"</span><span class="json-colon">:</span> <span class="json-string">"Common business name requires verification"</span><span class="json-comma">,</span>
+  <span class="json-key">"processingTime"</span><span class="json-colon">:</span> <span class="json-string">"0.01 seconds"</span><span class="json-comma">,</span>
+  <span class="json-key">"humanReviewRequired"</span><span class="json-colon">:</span> <span class="json-boolean">true</span>
+<span class="json-bracket">}</span>
+                        </div>
+
+                        <div class="example-label">✅ False Positive (Auto-Cleared):</div>
+                        <div class="json-container">
+<span class="json-bracket">{</span>
+  <span class="json-key">"alertId"</span><span class="json-colon">:</span> <span class="json-string">"MZH-IN-78123-2025"</span><span class="json-comma">,</span>
+  <span class="json-key">"originalEngineFlag"</span><span class="json-colon">:</span> <span class="json-boolean">true</span><span class="json-comma">,</span>
+  <span class="json-key">"aiConfidenceScore"</span><span class="json-colon">:</span> <span class="json-number">12.3</span><span class="json-comma">,</span>
+  <span class="json-key">"status"</span><span class="json-colon">:</span> <span class="json-string">"AUTO_CLEARED"</span><span class="json-comma">,</span>
+  <span class="json-key">"entity"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"name"</span><span class="json-colon">:</span> <span class="json-string">"John Smith"</span><span class="json-comma">,</span>
+    <span class="json-key">"type"</span><span class="json-colon">:</span> <span class="json-string">"INDIVIDUAL"</span><span class="json-comma">,</span>
+    <span class="json-key">"watchlistMatch"</span><span class="json-colon">:</span> <span class="json-string">"John Smith (PEP - Unrelated)"</span>
+  <span class="json-bracket">}</span><span class="json-comma">,</span>
+  <span class="json-key">"clearanceReasons"</span><span class="json-colon">:</span> <span class="json-bracket">[</span>
+    <span class="json-string">"Date of birth mismatch: 25+ years"</span><span class="json-comma">,</span>
+    <span class="json-string">"Different nationality confirmed"</span><span class="json-comma">,</span>
+    <span class="json-string">"Transaction pattern: Routine domestic"</span><span class="json-comma">,</span>
+    <span class="json-string">"Existing customer: 8-year banking history"</span>
+  <span class="json-bracket">]</span><span class="json-comma">,</span>
+  <span class="json-key">"recommendation"</span><span class="json-colon">:</span> <span class="json-string">"PROCEED_NORMAL"</span><span class="json-comma">,</span>
+  <span class="json-key">"explanation"</span><span class="json-colon">:</span> <span class="json-string">"Common name with sufficient differentiation"</span><span class="json-comma">,</span>
+  <span class="json-key">"processingTime"</span><span class="json-colon">:</span> <span class="json-string">"0.005 seconds"</span><span class="json-comma">,</span>
+  <span class="json-key">"humanReviewRequired"</span><span class="json-colon">:</span> <span class="json-boolean">false</span>
+<span class="json-bracket">}</span>
+                        </div>
                         <div class="demo-line success">✅ Processing completed: 835 alerts auto-cleared with full audit trail</div>
                         <div class="demo-line success">🎯 Analyst workload reduced by 85% while maintaining 100% compliance coverage</div>
                     </div>
@@ -707,8 +789,84 @@
                         <div class="demo-line info">🧠 AI Root Cause Analysis: Connection pool exhaustion predicted</div>
                         <div class="demo-line success">🔧 Automated remediation suggested: Scale connection pool +40%</div>
                         <div class="demo-line success">✅ Incident prevented: Estimated 15-minute customer service disruption avoided</div>
-                        <div class="demo-line info">📋 Operations team notified with guided remediation steps</div>
-                        <div class="demo-line success">🎯 Mean time to detection: 2 minutes vs 12 minutes (83% improvement)</div>
+
+                        <div class="demo-line info">📋 Sample AI Operations Alert Examples:</div>
+
+                        <div class="example-label">🚨 Critical System Alert (Auto-Escalated):</div>
+                        <div class="json-container">
+<span class="json-bracket">{</span>
+  <span class="json-key">"alertId"</span><span class="json-colon">:</span> <span class="json-string">"MZH-OPS-DB001-2025"</span><span class="json-comma">,</span>
+  <span class="json-key">"timestamp"</span><span class="json-colon">:</span> <span class="json-string">"2025-01-15T14:32:47.123Z"</span><span class="json-comma">,</span>
+  <span class="json-key">"severity"</span><span class="json-colon">:</span> <span class="json-string">"CRITICAL"</span><span class="json-comma">,</span>
+  <span class="json-key">"systemId"</span><span class="json-colon">:</span> <span class="json-string">"DB-SG-PROD-01"</span><span class="json-comma">,</span>
+  <span class="json-key">"anomalyScore"</span><span class="json-colon">:</span> <span class="json-number">94.7</span><span class="json-comma">,</span>
+  <span class="json-key">"currentMetrics"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"responseTimeMs"</span><span class="json-colon">:</span> <span class="json-number">4230</span><span class="json-comma">,</span>
+    <span class="json-key">"baselineMs"</span><span class="json-colon">:</span> <span class="json-number">1200</span><span class="json-comma">,</span>
+    <span class="json-key">"connectionPoolUtilization"</span><span class="json-colon">:</span> <span class="json-number">98.5</span><span class="json-comma">,</span>
+    <span class="json-key">"cpuUsage"</span><span class="json-colon">:</span> <span class="json-number">87.3</span>
+  <span class="json-bracket">}</span><span class="json-comma">,</span>
+  <span class="json-key">"predictedImpact"</span><span class="json-colon">:</span> <span class="json-bracket">[</span>
+    <span class="json-string">"Customer transaction failures within 8 minutes"</span><span class="json-comma">,</span>
+    <span class="json-string">"Mobile banking service degradation"</span><span class="json-comma">,</span>
+    <span class="json-string">"Estimated customer impact: 12,000 users"</span>
+  <span class="json-bracket">]</span><span class="json-comma">,</span>
+  <span class="json-key">"aiRecommendation"</span><span class="json-colon">:</span> <span class="json-string">"IMMEDIATE_SCALE_CONNECTIONS"</span><span class="json-comma">,</span>
+  <span class="json-key">"automatedActions"</span><span class="json-colon">:</span> <span class="json-bracket">[</span>
+    <span class="json-string">"Scaled connection pool: 150 → 210 connections"</span><span class="json-comma">,</span>
+    <span class="json-string">"Activated secondary read replicas"</span><span class="json-comma">,</span>
+    <span class="json-string">"Alerted NOC team with runbook link"</span>
+  <span class="json-bracket">]</span><span class="json-comma">,</span>
+  <span class="json-key">"incidentPrevented"</span><span class="json-colon">:</span> <span class="json-boolean">true</span>
+<span class="json-bracket">}</span>
+                        </div>
+
+                        <div class="example-label">⚠️ Performance Warning (Predictive Alert):</div>
+                        <div class="json-container">
+<span class="json-bracket">{</span>
+  <span class="json-key">"alertId"</span><span class="json-colon">:</span> <span class="json-string">"MZH-OPS-API002-2025"</span><span class="json-comma">,</span>
+  <span class="json-key">"timestamp"</span><span class="json-colon">:</span> <span class="json-string">"2025-01-15T14:28:15.456Z"</span><span class="json-comma">,</span>
+  <span class="json-key">"severity"</span><span class="json-colon">:</span> <span class="json-string">"WARNING"</span><span class="json-comma">,</span>
+  <span class="json-key">"systemId"</span><span class="json-colon">:</span> <span class="json-string">"API-GW-HK-02"</span><span class="json-comma">,</span>
+  <span class="json-key">"anomalyScore"</span><span class="json-colon">:</span> <span class="json-number">73.2</span><span class="json-comma">,</span>
+  <span class="json-key">"trendAnalysis"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"memoryGrowthRate"</span><span class="json-colon">:</span> <span class="json-string">"12MB/hour"</span><span class="json-comma">,</span>
+    <span class="json-key">"projectedExhaustion"</span><span class="json-colon">:</span> <span class="json-string">"4.2 hours"</span><span class="json-comma">,</span>
+    <span class="json-key">"similarIncidents"</span><span class="json-colon">:</span> <span class="json-number">3</span>
+  <span class="json-bracket">}</span><span class="json-comma">,</span>
+  <span class="json-key">"rootCause"</span><span class="json-colon">:</span> <span class="json-string">"Memory leak pattern in payment processing module"</span><span class="json-comma">,</span>
+  <span class="json-key">"recommendedAction"</span><span class="json-colon">:</span> <span class="json-string">"SCHEDULE_RESTART_MAINTENANCE_WINDOW"</span><span class="json-comma">,</span>
+  <span class="json-key">"businessImpact"</span><span class="json-colon">:</span> <span class="json-string">"LOW_CURRENT_HIGH_PROJECTED"</span><span class="json-comma">,</span>
+  <span class="json-key">"nextRecommendedCheck"</span><span class="json-colon">:</span> <span class="json-string">"2025-01-15T16:30:00Z"</span>
+<span class="json-bracket">}</span>
+                        </div>
+
+                        <div class="example-label">✅ Normal Operations (Baseline Confirmation):</div>
+                        <div class="json-container">
+<span class="json-bracket">{</span>
+  <span class="json-key">"alertId"</span><span class="json-colon">:</span> <span class="json-string">"MZH-OPS-NET001-2025"</span><span class="json-comma">,</span>
+  <span class="json-key">"timestamp"</span><span class="json-colon">:</span> <span class="json-string">"2025-01-15T14:30:00.789Z"</span><span class="json-comma">,</span>
+  <span class="json-key">"severity"</span><span class="json-colon">:</span> <span class="json-string">"INFO"</span><span class="json-comma">,</span>
+  <span class="json-key">"systemId"</span><span class="json-colon">:</span> <span class="json-string">"NETWORK-CORE-SG"</span><span class="json-comma">,</span>
+  <span class="json-key">"healthStatus"</span><span class="json-colon">:</span> <span class="json-string">"OPTIMAL"</span><span class="json-comma">,</span>
+  <span class="json-key">"performanceMetrics"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"latency"</span><span class="json-colon">:</span> <span class="json-string">"2.3ms (baseline: 2.1ms)"</span><span class="json-comma">,</span>
+    <span class="json-key">"throughput"</span><span class="json-colon">:</span> <span class="json-string">"45,230 req/sec"</span><span class="json-comma">,</span>
+    <span class="json-key">"errorRate"</span><span class="json-colon">:</span> <span class="json-string">"0.02%"</span><span class="json-comma">,</span>
+    <span class="json-key">"availability"</span><span class="json-colon">:</span> <span class="json-string">"99.97%"</span>
+  <span class="json-bracket">}</span><span class="json-comma">,</span>
+  <span class="json-key">"aiInsights"</span><span class="json-colon">:</span> <span class="json-bracket">[</span>
+    <span class="json-string">"Traffic patterns normal for Tuesday afternoon"</span><span class="json-comma">,</span>
+    <span class="json-string">"No capacity scaling required"</span><span class="json-comma">,</span>
+    <span class="json-string">"All backup systems verified operational"</span>
+  <span class="json-bracket">]</span><span class="json-comma">,</span>
+  <span class="json-key">"nextAction"</span><span class="json-colon">:</span> <span class="json-string">"CONTINUE_MONITORING"</span><span class="json-comma">,</span>
+  <span class="json-key">"proactiveMaintenanceWindow"</span><span class="json-colon">:</span> <span class="json-string">"2025-01-18T02:00:00Z"</span>
+<span class="json-bracket">}</span>
+                        </div>
+
+                        <div class="demo-line success">🎯 Operations efficiency: 2 minutes MTTD vs 12 minutes baseline (83% improvement)</div>
+                        <div class="demo-line success">✅ Automated resolution rate: 67% of incidents handled without human intervention</div>
                     </div>
                 </div>
             </div>
