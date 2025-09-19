@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizuho Strategic AI Use Cases - Sanctions Screening & IT Operations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafb 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 8px 25px rgba(220,38,38,0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #dc2626;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .use-case-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220,38,38,0.3);
+        }
+
+        .use-case-content {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .use-case-content.active {
+            display: block;
+        }
+
+        .use-case-hero {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .use-case-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(220,38,38,0.05), rgba(16,185,129,0.05));
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .sanctions-icon {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .operations-icon {
+            background: linear-gradient(135deg, #0078d4, #106ebe);
+        }
+
+        .metrics-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #dc2626, #0078d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .demo-container {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px dashed #e2e8f0;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .demo-button {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16,185,129,0.3);
+        }
+
+        .demo-output {
+            background: #1e293b;
+            color: #64748b;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            display: none;
+        }
+
+        .demo-output.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .demo-line {
+            margin: 5px 0;
+        }
+
+        .success { color: #10b981; }
+        .warning { color: #f59e0b; }
+        .error { color: #ef4444; }
+        .info { color: #3b82f6; }
+
+        .implementation-roadmap {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .roadmap-line {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #dc2626, #0078d4);
+        }
+
+        .roadmap-step {
+            position: relative;
+            margin: 30px 0;
+            padding-left: 80px;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: 22px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #dc2626;
+        }
+
+        .roadmap-content {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #dc2626;
+        }
+
+        .roadmap-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-desc {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #dc2626, #0078d4);
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .benefit-desc {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .use-case-tabs {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .metrics-section {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .roadmap-step {
+                padding-left: 60px;
+            }
+        }
+
+        .roi-calculator {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .roi-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .roi-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .roi-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">
+        ← Back to Overview
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Mizuho Strategic AI Use Cases</h1>
+            <p class="subtitle">Deep-dive into Sanctions Screening Precision AI and IT Operations Reliability AI - two strategic applications delivering immediate business value while establishing foundation capabilities for scalable AI adoption</p>
+        </div>
+
+        <div class="use-case-tabs">
+            <button class="tab-button active" onclick="switchTab('sanctions')">Sanctions Screening AI</button>
+            <button class="tab-button" onclick="switchTab('operations')">IT Operations Reliability AI</button>
+        </div>
+
+        <!-- Sanctions Screening AI Content -->
+        <div id="sanctions" class="use-case-content active">
+            <div class="use-case-hero">
+                <div class="hero-content">
+                    <div class="hero-icon sanctions-icon">🛡️</div>
+                    <h2 style="color: #dc2626; font-size: 2rem; margin-bottom: 20px;">Sanctions Screening Precision AI</h2>
+                    <p style="font-size: 1.2rem; color: #64748b; line-height: 1.8;">
+                        Advanced machine learning algorithms to reduce false positive rates in sanctions screening while improving explainability and audit trail transparency.
+                        Designed to enhance rather than replace existing compliance frameworks with 70-85% false positive reduction and complete regulatory auditability.
+                    </p>
+                </div>
+            </div>
+
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <div class="metric-value">70-85%</div>
+                    <div class="metric-label">False Positive Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">40-60%</div>
+                    <div class="metric-label">Processing Efficiency Improvement</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Audit Trail Transparency</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99%</div>
+                    <div class="metric-label">Regulatory Compliance Accuracy</div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3 style="color: #1e293b; margin-bottom: 20px;">Interactive Sanctions Screening Demo</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Experience how AI-enhanced sanctions screening processes synthetic transaction data with explainable decision-making</p>
+
+                <div class="demo-container">
+                    <button class="demo-button" onclick="runSanctionsDemo()">Run Sanctions Screening Simulation</button>
+                    <div id="sanctionsOutput" class="demo-output">
+                        <div class="demo-line info">🔍 Initializing Sanctions Screening AI Engine...</div>
+                        <div class="demo-line success">✅ Loading synthetic transaction dataset (1,000 transactions)</div>
+                        <div class="demo-line info">🧠 Applying ML algorithms: NLP Entity Recognition + Risk Scoring</div>
+                        <div class="demo-line warning">⚠️  Traditional Rule-based System: 950 flagged transactions (95% false positive rate)</div>
+                        <div class="demo-line success">✅ AI-Enhanced System: 142 flagged transactions (15% false positive rate)</div>
+                        <div class="demo-line success">📊 Improvement: 85% reduction in false positives</div>
+                        <div class="demo-line info">📋 Generating explainability reports for all flagged transactions...</div>
+                        <div class="demo-line success">✅ Audit trail generated with decision factors and confidence scores</div>
+                        <div class="demo-line success">🎯 Processing time reduced from 8 hours to 2 hours (75% improvement)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-title">Operational Efficiency</div>
+                    <div class="benefit-desc">Dramatically reduce manual review workload while accelerating legitimate transaction processing through intelligent false positive reduction.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔍</div>
+                    <div class="benefit-title">Enhanced Precision</div>
+                    <div class="benefit-desc">Advanced NLP algorithms analyze entity names, addresses, and transaction descriptions with significantly higher accuracy than traditional rule-based systems.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-title">Complete Transparency</div>
+                    <div class="benefit-desc">Full explainability features provide clear audit trails showing why specific transactions receive elevated risk scores, supporting regulatory examination.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌏</div>
+                    <div class="benefit-title">Regional Scalability</div>
+                    <div class="benefit-desc">Framework scales across Singapore, Hong Kong, and India while accommodating jurisdiction-specific sanctions requirements and regulatory compliance.</div>
+                </div>
+            </div>
+
+            <div class="roi-calculator">
+                <h3 style="margin-bottom: 20px; font-size: 1.8rem;">Sanctions Screening ROI Analysis</h3>
+                <p style="margin-bottom: 30px; opacity: 0.95;">Based on industry benchmarks and regional banking implementations</p>
+
+                <div class="roi-grid">
+                    <div class="roi-item">
+                        <div class="roi-value">$2.4M</div>
+                        <div class="roi-label">Annual Labor Savings</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">$850K</div>
+                        <div class="roi-label">Reduced Processing Delays</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">$1.2M</div>
+                        <div class="roi-label">Compliance Efficiency</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">324%</div>
+                        <div class="roi-label">3-Year ROI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IT Operations Reliability AI Content -->
+        <div id="operations" class="use-case-content">
+            <div class="use-case-hero">
+                <div class="hero-content">
+                    <div class="hero-icon operations-icon">⚙️</div>
+                    <h2 style="color: #0078d4; font-size: 2rem; margin-bottom: 20px;">IT Operations Reliability AI</h2>
+                    <p style="font-size: 1.2rem; color: #64748b; line-height: 1.8;">
+                        Intelligent monitoring and automated response capabilities to improve system resilience and reduce incident resolution time.
+                        Complements existing investments by developing bank-owned intellectual property for anomaly detection, incident prediction, and automated remediation guidance.
+                    </p>
+                </div>
+            </div>
+
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <div class="metric-value">40-60%</div>
+                    <div class="metric-label">Mean Time to Detection Improvement</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">30-50%</div>
+                    <div class="metric-label">Incident Resolution Time Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">20-30%</div>
+                    <div class="metric-label">Proactive Issue Prevention</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.9%</div>
+                    <div class="metric-label">System Availability Target</div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3 style="color: #1e293b; margin-bottom: 20px;">Interactive Operations Reliability Demo</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Experience how AI-powered anomaly detection identifies and responds to potential system issues before customer impact</p>
+
+                <div class="demo-container">
+                    <button class="demo-button" onclick="runOperationsDemo()">Run Operations Monitoring Simulation</button>
+                    <div id="operationsOutput" class="demo-output">
+                        <div class="demo-line info">🖥️  Initializing IT Operations Reliability AI Engine...</div>
+                        <div class="demo-line success">✅ Connected to infrastructure telemetry (50+ systems monitoring)</div>
+                        <div class="demo-line info">📊 Analyzing performance metrics, logs, and historical incident patterns</div>
+                        <div class="demo-line warning">⚠️  Anomaly detected: Database response time 300% above baseline (Server DB-SG-01)</div>
+                        <div class="demo-line info">🧠 AI Root Cause Analysis: Connection pool exhaustion predicted</div>
+                        <div class="demo-line success">🔧 Automated remediation suggested: Scale connection pool +40%</div>
+                        <div class="demo-line success">✅ Incident prevented: Estimated 15-minute customer service disruption avoided</div>
+                        <div class="demo-line info">📋 Operations team notified with guided remediation steps</div>
+                        <div class="demo-line success">🎯 Mean time to detection: 2 minutes vs 12 minutes (83% improvement)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <div class="benefit-title">Proactive Monitoring</div>
+                    <div class="benefit-desc">Real-time analysis of infrastructure telemetry and application performance metrics identifies potential issues before customer impact occurs.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🧠</div>
+                    <div class="benefit-title">Intelligent Root Cause Analysis</div>
+                    <div class="benefit-desc">Machine learning algorithms analyze historical incident patterns to provide contextual information and automated remediation guidance.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔗</div>
+                    <div class="benefit-title">Seamless Integration</div>
+                    <div class="benefit-desc">Enhances existing monitoring infrastructure without requiring wholesale replacement, complementing IBM watsonx investments with bank-owned IP.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-title">Human-Centric Design</div>
+                    <div class="benefit-desc">Provides operations teams with intelligent recommendations while maintaining human oversight for critical decisions and operational control.</div>
+                </div>
+            </div>
+
+            <div class="roi-calculator">
+                <h3 style="margin-bottom: 20px; font-size: 1.8rem;">Operations Reliability ROI Analysis</h3>
+                <p style="margin-bottom: 30px; opacity: 0.95;">Based on system reliability improvements and operational efficiency gains</p>
+
+                <div class="roi-grid">
+                    <div class="roi-item">
+                        <div class="roi-value">$1.8M</div>
+                        <div class="roi-label">Reduced Downtime Costs</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">$950K</div>
+                        <div class="roi-label">Operations Efficiency</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">$650K</div>
+                        <div class="roi-label">Improved Customer Experience</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">287%</div>
+                        <div class="roi-label">3-Year ROI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="implementation-roadmap">
+            <h2 style="color: #1e293b; margin-bottom: 20px;">Implementation Roadmap</h2>
+            <p style="color: #64748b; margin-bottom: 30px;">Phased approach ensuring successful deployment across regional operations</p>
+
+            <div class="roadmap-timeline">
+                <div class="roadmap-line"></div>
+
+                <div class="roadmap-step">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Phase 1: Singapore Pilot (Weeks 1-8)</div>
+                        <div class="roadmap-desc">Deploy initial prototypes using synthetic data, establish governance frameworks, and validate business impact with controlled testing environment.</div>
+                    </div>
+                </div>
+
+                <div class="roadmap-step">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Phase 2: Production Integration (Weeks 9-16)</div>
+                        <div class="roadmap-desc">Integrate successful prototypes into production systems with appropriate safeguards, human oversight, and gradual rollout to operations teams.</div>
+                    </div>
+                </div>
+
+                <div class="roadmap-step">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Phase 3: Hong Kong Expansion (Weeks 17-24)</div>
+                        <div class="roadmap-desc">Replicate successful Singapore implementation with HKMA regulatory adaptations and local operational integration requirements.</div>
+                    </div>
+                </div>
+
+                <div class="roadmap-step">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Phase 4: India Scaling (Weeks 25-32)</div>
+                        <div class="roadmap-desc">Deploy across India operations with RBI compliance framework and support for regional growth strategy and operational excellence objectives.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.use-case-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected content and activate button
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function runSanctionsDemo() {
+            const output = document.getElementById('sanctionsOutput');
+            output.classList.add('active');
+
+            // Scroll to output
+            output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function runOperationsDemo() {
+            const output = document.getElementById('operationsOutput');
+            output.classList.add('active');
+
+            // Scroll to output
+            output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for animation
+        document.querySelectorAll('.metric-card, .benefit-card, .use-case-hero').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s ease-out';
+            observer.observe(element);
+        });
+
+        // Add hover effects
+        document.querySelectorAll('.metric-card, .benefit-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Animate metric values on scroll
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const metricValue = entry.target.querySelector('.metric-value');
+                    if (metricValue) {
+                        const finalValue = metricValue.textContent;
+
+                        // Animate counting for percentage values
+                        if (finalValue.includes('%') || finalValue.includes('-')) {
+                            let currentValue = 0;
+                            const targetValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                            const increment = targetValue / 40;
+                            const suffix = finalValue.replace(/[\d]/g, '');
+
+                            const counter = setInterval(() => {
+                                currentValue += increment;
+                                if (currentValue >= targetValue) {
+                                    metricValue.textContent = finalValue;
+                                    clearInterval(counter);
+                                } else {
+                                    metricValue.textContent = Math.floor(currentValue) + suffix;
+                                }
+                            }, 30);
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-card').forEach(card => {
+            metricsObserver.observe(card);
+        });
+    </script>
+</body>
+</html>

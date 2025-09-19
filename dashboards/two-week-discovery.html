@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizuho Two-Week Discovery Workshop - Interactive Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafb 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 8px 25px rgba(16,185,129,0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #10b981;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .workshop-overview {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .week-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .week-tab {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .week-tab.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16,185,129,0.3);
+        }
+
+        .week-content {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .week-content.active {
+            display: block;
+        }
+
+        .week-hero {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .daily-timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .day-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .day-card:hover::before {
+            opacity: 1;
+        }
+
+        .day-number {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .day-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .day-activities {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .day-deliverable {
+            background: rgba(16,185,129,0.1);
+            color: #10b981;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .methodology-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .methodology-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #10b981;
+        }
+
+        .method-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .method-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .method-desc {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .orbus-integration {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .orbus-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .orbus-feature {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid rgba(255,255,255,0.3);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .stakeholder-map {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .stakeholder-card {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .stakeholder-card:hover {
+            border-color: #10b981;
+            transform: translateY(-3px);
+        }
+
+        .stakeholder-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .stakeholder-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .stakeholder-role {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .deliverables-timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .deliverable-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin: 15px 0;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+            transition: all 0.3s ease;
+        }
+
+        .deliverable-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .deliverable-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.2rem;
+        }
+
+        .deliverable-content {
+            flex: 1;
+        }
+
+        .deliverable-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .deliverable-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .orbus-features {
+                grid-template-columns: 1fr;
+            }
+
+            .stakeholder-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .week2-hero {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">
+        ← Back to Overview
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Two-Week Discovery Workshop</h1>
+            <p class="subtitle">Interactive timeline and methodology for comprehensive discovery engagement integrating stakeholder alignment, team assessments, OrbusInfinity visualization, and prototype development with clear deliverables</p>
+        </div>
+
+        <div class="workshop-overview">
+            <h2 style="color: #1e293b; margin-bottom: 20px; text-align: center;">Workshop Methodology Overview</h2>
+            <p style="color: #64748b; text-align: center; margin-bottom: 30px; line-height: 1.8;">
+                The engagement structure reflects lessons learned from enterprise AI implementations across regulated industries. Week one focuses on organizational assessment and stakeholder alignment,
+                while week two demonstrates practical AI applications through interactive visualization and prototype development.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 15px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🔍</div>
+                    <h3 style="color: #10b981; margin-bottom: 10px;">Week 1: Discovery & Assessment</h3>
+                    <p style="color: #64748b; line-height: 1.6;">Comprehensive stakeholder alignment, organizational mapping, team discovery sessions, and findings synthesis</p>
+                </div>
+                <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 15px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🚀</div>
+                    <h3 style="color: #3b82f6; margin-bottom: 10px;">Week 2: Visualization & Prototypes</h3>
+                    <p style="color: #64748b; line-height: 1.6;">Interactive OrbusInfinity demonstrations, prototype development, documentation synthesis, and comprehensive presentation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="week-tabs">
+            <button class="week-tab active" onclick="switchWeek('week1')">Week 1</button>
+            <button class="week-tab" onclick="switchWeek('week2')">Week 2</button>
+        </div>
+
+        <!-- Week 1 Content -->
+        <div id="week1" class="week-content active">
+            <div class="week-hero">
+                <div class="hero-icon">🔍</div>
+                <h2 class="hero-title">Week 1: Discovery & Assessment</h2>
+                <p class="hero-desc">
+                    Comprehensive stakeholder alignment and organizational assessment phase focusing on understanding current capabilities,
+                    identifying pain points, and establishing foundation for AI transformation through structured discovery sessions with individual IT teams.
+                </p>
+            </div>
+
+            <div class="daily-timeline">
+                <h3 style="color: #1e293b; margin-bottom: 20px; text-align: center;">Week 1 Daily Timeline</h3>
+                <p style="color: #64748b; text-align: center; margin-bottom: 30px;">Click on each day to explore detailed activities and objectives</p>
+
+                <div class="days-grid">
+                    <div class="day-card" onclick="focusDay(1)">
+                        <div class="day-number">1</div>
+                        <div class="day-title">Kickoff & Alignment</div>
+                        <div class="day-activities">
+                            • Stakeholder alignment session<br>
+                            • Project objectives confirmation<br>
+                            • Team org-chart review<br>
+                            • Interim AI strategy review
+                        </div>
+                        <div class="day-deliverable">Alignment Plan</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(2)">
+                        <div class="day-number">2</div>
+                        <div class="day-title">Team Discovery Begin</div>
+                        <div class="day-activities">
+                            • First team sessions start<br>
+                            • "AI for your role" workshops<br>
+                            • Use case identification<br>
+                            • Initial capability assessment
+                        </div>
+                        <div class="day-deliverable">Session Notes</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(3)">
+                        <div class="day-number">3</div>
+                        <div class="day-title">Team Discovery Continue</div>
+                        <div class="day-activities">
+                            • Continued team sessions<br>
+                            • Pain point identification<br>
+                            • Data source mapping<br>
+                            • Technical feasibility review
+                        </div>
+                        <div class="day-deliverable">Capability Matrix</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(4)">
+                        <div class="day-number">4</div>
+                        <div class="day-title">Findings Synthesis</div>
+                        <div class="day-activities">
+                            • Knowledge synthesis<br>
+                            • Data requirements analysis<br>
+                            • Feasibility assessment<br>
+                            • Gap identification
+                        </div>
+                        <div class="day-deliverable">Assessment Report</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(5)">
+                        <div class="day-number">5</div>
+                        <div class="day-title">Prioritization & Planning</div>
+                        <div class="day-activities">
+                            • Use case prioritization<br>
+                            • POC selection decision<br>
+                            • Success criteria definition<br>
+                            • Week 2 planning
+                        </div>
+                        <div class="day-deliverable">Priority Matrix</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="methodology-section">
+                <h3 style="color: #1e293b; margin-bottom: 20px;">Week 1 Methodology Framework</h3>
+                <p style="color: #64748b; margin-bottom: 30px;">Structured approach ensuring comprehensive organizational understanding and stakeholder buy-in</p>
+
+                <div class="methodology-grid">
+                    <div class="methodology-card">
+                        <div class="method-icon">🎯</div>
+                        <div class="method-title">Stakeholder Alignment</div>
+                        <div class="method-desc">Structured workshops with IT leadership, regional operations teams, and compliance organizations to establish shared understanding of current AI investments and clarify regulatory constraints across different markets.</div>
+                    </div>
+
+                    <div class="methodology-card">
+                        <div class="method-icon">👥</div>
+                        <div class="method-title">Team Discovery Sessions</div>
+                        <div class="method-desc">Focused sessions with individual IT teams across functional areas including infrastructure management, application development, cybersecurity operations, and compliance monitoring.</div>
+                    </div>
+
+                    <div class="methodology-card">
+                        <div class="method-icon">📊</div>
+                        <div class="method-title">Capability Assessment</div>
+                        <div class="method-desc">Comprehensive evaluation of current data sources, understanding integration requirements, and assessing regulatory implications across Singapore, Hong Kong, and India markets.</div>
+                    </div>
+
+                    <div class="methodology-card">
+                        <div class="method-title">Strategic Prioritization</div>
+                        <div class="method-desc">Evidence-based prioritization of opportunities considering business impact, implementation complexity, regulatory requirements, and alignment with existing IBM watsonx and Google Cloud investments.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stakeholder-map">
+                <h3 style="color: #1e293b; margin-bottom: 20px;">Key Stakeholder Engagement</h3>
+                <p style="color: #64748b; margin-bottom: 30px;">Critical participants ensuring comprehensive organizational coverage and decision-making authority</p>
+
+                <div class="stakeholder-grid">
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">👔</div>
+                        <div class="stakeholder-title">IT Leadership</div>
+                        <div class="stakeholder-role">Strategic oversight and approval authority</div>
+                    </div>
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">🔧</div>
+                        <div class="stakeholder-title">Infrastructure Teams</div>
+                        <div class="stakeholder-role">Technical implementation and integration</div>
+                    </div>
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">🛡️</div>
+                        <div class="stakeholder-title">Security & Compliance</div>
+                        <div class="stakeholder-role">Risk management and regulatory alignment</div>
+                    </div>
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">⚙️</div>
+                        <div class="stakeholder-title">Operations Teams</div>
+                        <div class="stakeholder-role">Day-to-day operational requirements</div>
+                    </div>
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">📱</div>
+                        <div class="stakeholder-title">Application Development</div>
+                        <div class="stakeholder-role">System integration and development</div>
+                    </div>
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">🌏</div>
+                        <div class="stakeholder-title">Regional Operations</div>
+                        <div class="stakeholder-role">Multi-jurisdictional requirements</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 2 Content -->
+        <div id="week2" class="week-content">
+            <div class="week-hero week2-hero">
+                <div class="hero-icon">🚀</div>
+                <h2 class="hero-title">Week 2: Visualization & Prototypes</h2>
+                <p class="hero-desc">
+                    Interactive demonstration and prototype development phase leveraging OrbusInfinity enterprise architecture platform to transform
+                    abstract AI concepts into tangible business propositions with working demonstrations of selected AI applications.
+                </p>
+            </div>
+
+            <div class="daily-timeline">
+                <h3 style="color: #1e293b; margin-bottom: 20px; text-align: center;">Week 2 Daily Timeline</h3>
+                <p style="color: #64748b; text-align: center; margin-bottom: 30px;">Interactive development and demonstration phase</p>
+
+                <div class="days-grid">
+                    <div class="day-card" onclick="focusDay(6)">
+                        <div class="day-number">6</div>
+                        <div class="day-title">OrbusInfinity Setup</div>
+                        <div class="day-activities">
+                            • Apply learnings to OrbusInfinity<br>
+                            • Start synthetic POC development<br>
+                            • Initial stakeholder validation<br>
+                            • Architecture modeling begin
+                        </div>
+                        <div class="day-deliverable">Initial Models</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(7)">
+                        <div class="day-number">7</div>
+                        <div class="day-title">Interactive Development</div>
+                        <div class="day-activities">
+                            • Continue OrbusInfinity modeling<br>
+                            • Synthetic POC enhancement<br>
+                            • Sanctions screening prototype<br>
+                            • Team validation sessions
+                        </div>
+                        <div class="day-deliverable">Working Prototypes</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(8)">
+                        <div class="day-number">8</div>
+                        <div class="day-title">Prototype Refinement</div>
+                        <div class="day-activities">
+                            • Operations reliability AI demo<br>
+                            • Interactive visualization polish<br>
+                            • Performance metrics validation<br>
+                            • User experience optimization
+                        </div>
+                        <div class="day-deliverable">Refined Demos</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(9)">
+                        <div class="day-number">9</div>
+                        <div class="day-title">Documentation & Preparation</div>
+                        <div class="day-activities">
+                            • Comprehensive documentation<br>
+                            • Presentation preparation<br>
+                            • 8-Step framework overlay<br>
+                            • Executive briefing materials
+                        </div>
+                        <div class="day-deliverable">Final Documentation</div>
+                    </div>
+
+                    <div class="day-card" onclick="focusDay(10)">
+                        <div class="day-number">10</div>
+                        <div class="day-title">Discovery Presentation</div>
+                        <div class="day-activities">
+                            • Comprehensive findings presentation<br>
+                            • Interactive demonstrations<br>
+                            • Next steps planning<br>
+                            • Implementation roadmap
+                        </div>
+                        <div class="day-deliverable">Final Presentation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="orbus-integration">
+                <h3 style="margin-bottom: 20px; font-size: 1.8rem;">OrbusInfinity Enterprise Architecture Integration</h3>
+                <p style="margin-bottom: 30px; opacity: 0.95; line-height: 1.8;">
+                    Leverage OrbusInfinity's enterprise architecture visualization capabilities to transform abstract AI concepts into tangible business propositions,
+                    addressing common challenges where stakeholders struggle to understand practical implications of AI applications.
+                </p>
+
+                <div class="orbus-features">
+                    <div class="orbus-feature">
+                        <div class="feature-title">Interactive Process Modeling</div>
+                        <div class="feature-desc">Create interactive models showing current state operational processes, data flows, and system architectures across Mizuho's regional operations providing baseline understanding for AI opportunities.</div>
+                    </div>
+
+                    <div class="orbus-feature">
+                        <div class="feature-title">Scenario Visualization</div>
+                        <div class="feature-desc">Demonstrate how AI applications integrate within existing workflows through comparative analysis between current manual processes and AI-enhanced alternatives with guided stakeholder interaction.</div>
+                    </div>
+
+                    <div class="orbus-feature">
+                        <div class="feature-title">Dynamic Dashboards</div>
+                        <div class="feature-desc">Generate real-time visualization of AI application performance metrics enabling ongoing monitoring and optimization while supporting both technical teams and business stakeholders.</div>
+                    </div>
+
+                    <div class="orbus-feature">
+                        <div class="feature-title">Governance Integration</div>
+                        <div class="feature-desc">Ensure AI implementations maintain appropriate oversight and audit trail documentation required for banking regulatory environments with seamless enterprise architecture governance integration.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="methodology-section">
+                <h3 style="color: #1e293b; margin-bottom: 20px;">Week 2 Prototype Development</h3>
+                <p style="color: #64748b; margin-bottom: 30px;">Focused development of strategic AI applications using synthetic data and controlled environments</p>
+
+                <div class="methodology-grid">
+                    <div class="methodology-card">
+                        <div class="method-icon">🛡️</div>
+                        <div class="method-title">Sanctions Screening Precision AI</div>
+                        <div class="method-desc">Machine learning algorithms to reduce false positive rates while improving audit trail transparency. Demonstrates comparative analysis between current manual screening and AI-enhanced precision with explainability features.</div>
+                    </div>
+
+                    <div class="methodology-card">
+                        <div class="method-icon">⚙️</div>
+                        <div class="method-title">IT Operations Reliability AI</div>
+                        <div class="method-desc">Intelligent monitoring and automated response capabilities using simulated infrastructure telemetry to show anomaly detection, automated escalation, and guided remediation workflows.</div>
+                    </div>
+
+                    <div class="methodology-card">
+                        <div class="method-icon">📊</div>
+                        <div class="method-title">Interactive Visualizations</div>
+                        <div class="method-desc">OrbusInfinity platform enables automatic generation of executive briefing materials, technical architecture diagrams, and implementation roadmaps based on interactive exploration.</div>
+                    </div>
+
+                    <div class="methodology-card">
+                        <div class="method-icon">🎯</div>
+                        <div class="method-title">Business Impact Validation</div>
+                        <div class="method-desc">Comprehensive validation of business value propositions and technical feasibility through interactive demonstration enabling immediate stakeholder confidence building.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="deliverables-timeline">
+            <h2 style="color: #1e293b; margin-bottom: 20px;">Comprehensive Deliverables Timeline</h2>
+            <p style="color: #64748b; margin-bottom: 30px;">Complete overview of outputs and deliverables throughout the two-week engagement</p>
+
+            <div class="deliverable-item">
+                <div class="deliverable-icon">📋</div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">AI Vision Brief & Executive Alignment Plan</div>
+                    <div class="deliverable-desc">Strategic alignment documentation connecting AI initiatives to Mizuho's business objectives and regional expansion priorities</div>
+                </div>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-icon">📊</div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Maturity Assessment Report & Investment Roadmap</div>
+                    <div class="deliverable-desc">Comprehensive evaluation of current capabilities with clear roadmap for closing gaps and guiding investment priorities</div>
+                </div>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-icon">🏗️</div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Target Architecture & Data Integration Plan</div>
+                    <div class="deliverable-desc">Technical architecture specifications leveraging existing Google Cloud and enterprise data infrastructure investments</div>
+                </div>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-icon">🛡️</div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">AI Governance Charter & Compliance Framework</div>
+                    <div class="deliverable-desc">Multi-jurisdictional governance framework supporting MAS, HKMA, and RBI regulatory requirements with risk management matrix</div>
+                </div>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-icon">🚀</div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Working AI Prototypes & Impact Analysis</div>
+                    <div class="deliverable-desc">Functional demonstrations of sanctions screening and operations reliability AI with detailed business impact and ROI analysis</div>
+                </div>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-icon">📈</div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Implementation Roadmap & Change Management Plan</div>
+                    <div class="deliverable-desc">Detailed deployment strategy for scaling prototypes into production with regional expansion timeline and stakeholder engagement plan</div>
+                </div>
+            </div>
+
+            <div class="deliverable-item">
+                <div class="deliverable-icon">🎯</div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Center of Excellence Charter & Innovation Pipeline</div>
+                    <div class="deliverable-desc">Framework for establishing Mizuho Southeast Asia as regional AI innovation hub with sustainable innovation mechanisms and MLOps foundation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchWeek(weekId) {
+            // Hide all week content
+            document.querySelectorAll('.week-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active from all tabs
+            document.querySelectorAll('.week-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected content and activate tab
+            document.getElementById(weekId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function focusDay(dayNumber) {
+            // Add click animation to the day card
+            const dayCards = document.querySelectorAll('.day-card');
+            const targetCard = dayCards[dayNumber - 1];
+
+            if (targetCard) {
+                targetCard.style.transform = 'translateY(-5px) scale(1.02)';
+                targetCard.style.boxShadow = '0 15px 40px rgba(16,185,129,0.2)';
+
+                setTimeout(() => {
+                    targetCard.style.transform = '';
+                    targetCard.style.boxShadow = '';
+                }, 300);
+            }
+
+            console.log(`Focused on Day ${dayNumber}`);
+        }
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.day-card, .methodology-card, .deliverable-item, .stakeholder-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s ease-out';
+            observer.observe(element);
+        });
+
+        // Enhanced hover effects
+        document.querySelectorAll('.day-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 12px 35px rgba(0,0,0,0.15)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+
+        document.querySelectorAll('.deliverable-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+                this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+    </script>
+</body>
+</html>

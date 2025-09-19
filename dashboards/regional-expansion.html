@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizuho Regional AI Expansion Strategy - Singapore → Hong Kong → India</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafb 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 8px 25px rgba(139,92,246,0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #8b5cf6;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .regional-map {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .country-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .country-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .singapore-card::before { background: linear-gradient(90deg, #10b981, #059669); }
+        .hongkong-card::before { background: linear-gradient(90deg, #3b82f6, #1d4ed8); }
+        .india-card::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
+
+        .country-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .country-flag {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .country-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .singapore-title { color: #10b981; }
+        .hongkong-title { color: #3b82f6; }
+        .india-title { color: #f59e0b; }
+
+        .country-phase {
+            background: rgba(139,92,246,0.1);
+            color: #8b5cf6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .country-desc {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .regulatory-info {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid;
+            margin-bottom: 15px;
+        }
+
+        .singapore-reg { border-left-color: #10b981; }
+        .hongkong-reg { border-left-color: #3b82f6; }
+        .india-reg { border-left-color: #f59e0b; }
+
+        .reg-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .reg-content {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .timeline-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .timeline-container {
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #10b981, #3b82f6, #f59e0b);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 60px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .timeline-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-card {
+            flex: 1;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .timeline-number {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            border: 4px solid white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .phase1 { background: linear-gradient(135deg, #10b981, #059669); }
+        .phase2 { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .phase3 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+        .governance-matrix {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .governance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .governance-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .governance-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .governance-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .risk-assessment {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .risk-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid rgba(255,255,255,0.3);
+        }
+
+        .risk-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .risk-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .success-metrics {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #8b5cf6, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @media (max-width: 768px) {
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-content {
+                flex-direction: column !important;
+                align-items: flex-start;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                flex-direction: column !important;
+            }
+
+            .timeline-number {
+                left: 30px;
+                position: relative;
+                margin-bottom: 20px;
+            }
+
+            .governance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">
+        ← Back to Overview
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Regional AI Expansion Strategy</h1>
+            <p class="subtitle">Strategic roadmap for AI implementation across Singapore → Hong Kong → India expansion with regulatory compliance frameworks, data residency considerations, and governance structures for multi-jurisdictional deployment</p>
+        </div>
+
+        <div class="regional-map">
+            <h2 style="color: #1e293b; margin-bottom: 20px; text-align: center;">Multi-Jurisdictional Implementation Framework</h2>
+            <p style="color: #64748b; text-align: center; margin-bottom: 30px;">Click on each region to explore specific implementation strategies and regulatory requirements</p>
+
+            <div class="map-container">
+                <!-- Singapore Hub -->
+                <div class="country-card singapore-card" onclick="focusRegion('singapore')">
+                    <div class="country-flag">🇸🇬</div>
+                    <div class="country-phase">Phase 1: Hub</div>
+                    <h3 class="country-title singapore-title">Singapore</h3>
+                    <p class="country-desc">Primary implementation hub leveraging advanced digital infrastructure, sophisticated regulatory environment, and existing concentration of Mizuho's regional technical capabilities.</p>
+
+                    <div class="regulatory-info singapore-reg">
+                        <div class="reg-title">MAS Regulatory Framework</div>
+                        <div class="reg-content">Technology Risk Management Guidelines, AI governance requirements, data residency compliance</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div style="text-align: center; background: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-weight: 700; color: #10b981;">8 weeks</div>
+                            <div style="font-size: 0.8rem; color: #64748b;">Pilot Duration</div>
+                        </div>
+                        <div style="text-align: center; background: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-weight: 700; color: #10b981;">Primary Hub</div>
+                            <div style="font-size: 0.8rem; color: #64748b;">Regional Role</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hong Kong Expansion -->
+                <div class="country-card hongkong-card" onclick="focusRegion('hongkong')">
+                    <div class="country-flag">🇭🇰</div>
+                    <div class="country-phase">Phase 2: Expansion</div>
+                    <h3 class="country-title hongkong-title">Hong Kong</h3>
+                    <p class="country-desc">Strategic expansion leveraging similar regulatory frameworks and technical sophistication while serving as gateway for broader Asia-Pacific operations.</p>
+
+                    <div class="regulatory-info hongkong-reg">
+                        <div class="reg-title">HKMA Standards</div>
+                        <div class="reg-content">Supervisory Policy Manual, operational resilience guidelines, cross-border data governance</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div style="text-align: center; background: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-weight: 700; color: #3b82f6;">12 weeks</div>
+                            <div style="font-size: 0.8rem; color: #64748b;">Deployment Duration</div>
+                        </div>
+                        <div style="text-text: center; background: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-weight: 700; color: #3b82f6;">APAC Gateway</div>
+                            <div style="font-size: 0.8rem; color: #64748b;">Strategic Role</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- India Growth -->
+                <div class="country-card india-card" onclick="focusRegion('india')">
+                    <div class="country-flag">🇮🇳</div>
+                    <div class="country-phase">Phase 3: Scale</div>
+                    <h3 class="country-title india-title">India</h3>
+                    <p class="country-desc">Large-scale deployment aligning with Mizuho's stated strategic growth priorities and CEO emphasis on India as key expansion market.</p>
+
+                    <div class="regulatory-info india-reg">
+                        <div class="reg-title">RBI Regulations</div>
+                        <div class="reg-content">Information Technology Framework, data localization requirements, operational guidelines</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div style="text-align: center; background: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-weight: 700; color: #f59e0b;">16 weeks</div>
+                            <div style="font-size: 0.8rem; color: #64748b;">Scale Duration</div>
+                        </div>
+                        <div style="text-align: center; background: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-weight: 700; color: #f59e0b;">Growth Engine</div>
+                            <div style="font-size: 0.8rem; color: #64748b;">Market Position</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <h2 style="color: #1e293b; margin-bottom: 20px; text-align: center;">Phased Implementation Timeline</h2>
+            <p style="color: #64748b; text-align: center; margin-bottom: 30px;">Risk-based prioritization considering regulatory complexity, technical infrastructure readiness, and business impact potential</p>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <!-- Phase 1: Singapore -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <h3 style="color: #10b981; margin-bottom: 15px;">Phase 1: Singapore Hub Implementation</h3>
+                            <p style="color: #64748b; margin-bottom: 20px; line-height: 1.7;">
+                                Initial AI applications deploy within Singapore operations to establish proof-of-concept validation and build internal confidence.
+                                Controlled environment enables learning and refinement while demonstrating practical business value to regional stakeholders.
+                            </p>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <h4 style="color: #1e293b; margin-bottom: 10px; font-size: 0.9rem;">Key Activities</h4>
+                                    <ul style="color: #64748b; font-size: 0.85rem; line-height: 1.6;">
+                                        <li>Deploy sanctions screening AI prototype</li>
+                                        <li>Implement operations reliability monitoring</li>
+                                        <li>Establish MAS compliance framework</li>
+                                        <li>Build local AI expertise</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: #1e293b; margin-bottom: 10px; font-size: 0.9rem;">Success Criteria</h4>
+                                    <ul style="color: #64748b; font-size: 0.85rem; line-height: 1.6;">
+                                        <li>70%+ false positive reduction</li>
+                                        <li>40%+ anomaly detection improvement</li>
+                                        <li>Full regulatory compliance</li>
+                                        <li>Stakeholder confidence building</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-number phase1">SG</div>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Hong Kong -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <h3 style="color: #3b82f6; margin-bottom: 15px;">Phase 2: Hong Kong Expansion</h3>
+                            <p style="color: #64748b; margin-bottom: 20px; line-height: 1.7;">
+                                Subsequent expansion leverages similar regulatory frameworks and technical sophistication while adapting to HKMA requirements.
+                                Builds on Singapore learnings with enhanced cross-border operational capabilities.
+                            </p>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <h4 style="color: #1e293b; margin-bottom: 10px; font-size: 0.9rem;">Key Activities</h4>
+                                    <ul style="color: #64748b; font-size: 0.85rem; line-height: 1.6;">
+                                        <li>Replicate Singapore success</li>
+                                        <li>HKMA regulatory adaptation</li>
+                                        <li>Cross-border data governance</li>
+                                        <li>Regional integration enhancement</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: #1e293b; margin-bottom: 10px; font-size: 0.9rem;">Success Criteria</h4>
+                                    <ul style="color: #64748b; font-size: 0.85rem; line-height: 1.6;">
+                                        <li>Maintain Singapore performance levels</li>
+                                        <li>HKMA compliance certification</li>
+                                        <li>Operational integration achieved</li>
+                                        <li>Regional scalability proven</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-number phase2">HK</div>
+                    </div>
+                </div>
+
+                <!-- Phase 3: India -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <h3 style="color: #f59e0b; margin-bottom: 15px;">Phase 3: India Strategic Scaling</h3>
+                            <p style="color: #64748b; margin-bottom: 20px; line-height: 1.7;">
+                                Large-scale deployment across India operations with RBI compliance framework supporting Mizuho's strategic growth priorities.
+                                CEO reiterates India as strategic priority with significant business expansion opportunities.
+                            </p>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <h4 style="color: #1e293b; margin-bottom: 10px; font-size: 0.9rem;">Key Activities</h4>
+                                    <ul style="color: #64748b; font-size: 0.85rem; line-height: 1.6;">
+                                        <li>Large-scale AI deployment</li>
+                                        <li>RBI regulatory compliance</li>
+                                        <li>Data localization implementation</li>
+                                        <li>Growth strategy enablement</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: #1e293b; margin-bottom: 10px; font-size: 0.9rem;">Success Criteria</h4>
+                                    <ul style="color: #64748b; font-size: 0.85rem; line-height: 1.6;">
+                                        <li>Scale performance maintenance</li>
+                                        <li>RBI operational approval</li>
+                                        <li>Business growth acceleration</li>
+                                        <li>Regional AI center establishment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-number phase3">IN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="governance-matrix">
+            <h2 style="color: #1e293b; margin-bottom: 20px;">Cross-Border Governance Framework</h2>
+            <p style="color: #64748b; margin-bottom: 30px;">Consistent AI application standards while accommodating jurisdiction-specific requirements for data residency, regulatory reporting, and oversight procedures</p>
+
+            <div class="governance-grid">
+                <div class="governance-card">
+                    <div class="governance-title">
+                        <div class="governance-icon">🛡️</div>
+                        Data Governance & Residency
+                    </div>
+                    <p style="color: #64748b; line-height: 1.6; font-size: 0.9rem;">
+                        Establish consistent data classification and handling procedures ensuring AI applications operate with appropriate data types while maintaining jurisdiction-specific residency requirements for Singapore, Hong Kong, and India.
+                    </p>
+                </div>
+
+                <div class="governance-card">
+                    <div class="governance-title">
+                        <div class="governance-icon">📋</div>
+                        Regulatory Compliance Matrix
+                    </div>
+                    <p style="color: #64748b; line-height: 1.6; font-size: 0.9rem;">
+                        Comprehensive mapping of MAS, HKMA, and RBI requirements with standardized compliance procedures, audit trail documentation, and regulatory reporting templates for each jurisdiction.
+                    </p>
+                </div>
+
+                <div class="governance-card">
+                    <div class="governance-title">
+                        <div class="governance-icon">🔍</div>
+                        Model Governance & Oversight
+                    </div>
+                    <p style="color: #64748b; line-height: 1.6; font-size: 0.9rem;">
+                        Clear oversight procedures for AI algorithm development, testing, validation, and ongoing monitoring including bias testing, explainability validation, and performance monitoring across all regions.
+                    </p>
+                </div>
+
+                <div class="governance-card">
+                    <div class="governance-title">
+                        <div class="governance-icon">👥</div>
+                        Skills & Knowledge Transfer
+                    </div>
+                    <p style="color: #64748b; line-height: 1.6; font-size: 0.9rem;">
+                        Sustainable AI capabilities across regional operations through standardized training programs, knowledge transfer protocols, and distributed AI expertise aligned with business expansion strategies.
+                    </p>
+                </div>
+
+                <div class="governance-card">
+                    <div class="governance-title">
+                        <div class="governance-icon">🚨</div>
+                        Incident Response Framework
+                    </div>
+                    <p style="color: #64748b; line-height: 1.6; font-size: 0.9rem;">
+                        AI-specific incident response procedures addressing model degradation, bias detection, and algorithmic failures with rapid response capabilities and appropriate stakeholder notification across regions.
+                    </p>
+                </div>
+
+                <div class="governance-card">
+                    <div class="governance-title">
+                        <div class="governance-icon">🔄</div>
+                        Continuous Innovation Pipeline
+                    </div>
+                    <p style="color: #64748b; line-height: 1.6; font-size: 0.9rem;">
+                        Sustainable mechanisms for ongoing AI evolution including model monitoring, performance optimization, and pipeline development for future use cases across multi-jurisdictional environment.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="risk-assessment">
+            <h2 style="margin-bottom: 20px;">Risk Mitigation Strategy</h2>
+            <p style="margin-bottom: 30px; opacity: 0.95;">Comprehensive risk mitigation addressing technical, regulatory, and operational challenges across multiple jurisdictions</p>
+
+            <div class="risk-grid">
+                <div class="risk-item">
+                    <div class="risk-title">Regulatory Compliance Risk</div>
+                    <div class="risk-desc">Deep understanding of banking compliance requirements across Singapore, Hong Kong, and India ensures AI applications support rather than complicate existing regulatory obligations with continuous engagement with compliance stakeholders.</div>
+                </div>
+
+                <div class="risk-item">
+                    <div class="risk-title">Technical Integration Risk</div>
+                    <div class="risk-desc">Comprehensive testing procedures, staged deployment approaches, and rollback capabilities enable rapid response to algorithm performance issues or integration challenges across different regional infrastructures.</div>
+                </div>
+
+                <div class="risk-item">
+                    <div class="risk-title">Data Residency & Privacy Risk</div>
+                    <div class="risk-desc">Synthetic data usage during development phases reduces operational risk while enabling thorough validation before production deployment with jurisdiction-specific data localization compliance.</div>
+                </div>
+
+                <div class="risk-item">
+                    <div class="risk-title">Operational Continuity Risk</div>
+                    <div class="risk-desc">Maintain existing processes and human oversight capabilities during AI deployment ensuring continuity of critical functions while building confidence in automated capabilities through gradual transition approaches.</div>
+                </div>
+
+                <div class="risk-item">
+                    <div class="risk-title">Change Management Risk</div>
+                    <div class="risk-desc">Structured communication, training, and stakeholder engagement programs address common challenges in enterprise AI adoption including skills gaps, cultural resistance, and unrealistic expectations across diverse regional teams.</div>
+                </div>
+
+                <div class="risk-item">
+                    <div class="risk-title">Scalability & Performance Risk</div>
+                    <div class="risk-desc">Standardized governance framework and technical infrastructure provide template for scaling AI applications with reduced implementation time and cost while maintaining quality and compliance standards across regions.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-metrics">
+            <h2 style="color: #1e293b; margin-bottom: 20px;">Regional Success Metrics</h2>
+            <p style="color: #64748b; margin-bottom: 30px;">Quantifiable outcomes demonstrating successful multi-jurisdictional AI implementation</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Regional Markets<br>Successfully Deployed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Regulatory Compliance<br>Across All Jurisdictions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">85%</div>
+                    <div class="metric-label">Performance Consistency<br>Across Regions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$8.5M</div>
+                    <div class="metric-label">Regional Annual<br>Cost Savings</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">16</div>
+                    <div class="metric-label">Countries Ready<br>for Future Expansion</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">365%</div>
+                    <div class="metric-label">Multi-Regional<br>ROI Achievement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function focusRegion(region) {
+            // Add click animation
+            const card = document.querySelector(`.${region}-card`);
+            card.style.transform = 'translateY(-10px) scale(1.05)';
+            card.style.boxShadow = '0 25px 60px rgba(0,0,0,0.2)';
+
+            setTimeout(() => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+            }, 300);
+
+            console.log(`Focused on region: ${region}`);
+        }
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.country-card, .timeline-item, .governance-card, .metric-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s ease-out';
+            observer.observe(element);
+        });
+
+        // Enhanced hover effects
+        document.querySelectorAll('.country-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 20px 50px rgba(0,0,0,0.15)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Animate metric values
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const metricValue = entry.target.querySelector('.metric-value');
+                    if (metricValue) {
+                        const finalValue = metricValue.textContent;
+
+                        if (finalValue.includes('%') || finalValue.includes('M') || /^\d+$/.test(finalValue)) {
+                            let currentValue = 0;
+                            const targetValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                            const increment = targetValue / 40;
+                            const suffix = finalValue.replace(/[\d]/g, '');
+
+                            const counter = setInterval(() => {
+                                currentValue += increment;
+                                if (currentValue >= targetValue) {
+                                    metricValue.textContent = finalValue;
+                                    clearInterval(counter);
+                                } else {
+                                    metricValue.textContent = Math.floor(currentValue) + suffix;
+                                }
+                            }, 30);
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-card').forEach(card => {
+            metricsObserver.observe(card);
+        });
+    </script>
+</body>
+</html>

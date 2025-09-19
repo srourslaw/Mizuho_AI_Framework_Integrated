@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizuho Bank AI Transformation - Thakral One 8-Step Framework + OrbusInfinity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafb 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .partnership-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo-img {
+            max-height: 80px;
+            max-width: 180px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+        }
+
+        .partnership-symbol {
+            font-size: 2rem;
+            color: #0078d4;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #0078d4;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #64748b;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .executive-summary {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #0078d4;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .executive-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(0,120,212,0.05), rgba(220,38,38,0.05), rgba(16,185,129,0.05));
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .executive-summary-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .framework-overview {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #10b981;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .step-item {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #0078d4, #106ebe);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .dashboards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out;
+            cursor: pointer;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+
+        .framework-card::before {
+            background: linear-gradient(90deg, #0078d4, #106ebe);
+        }
+
+        .usecases-card::before {
+            background: linear-gradient(90deg, #dc2626, #b91c1c);
+        }
+
+        .workshop-card::before {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .regional-card::before {
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .dashboard-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-icon {
+            background: linear-gradient(135deg, #0078d4, #106ebe);
+        }
+
+        .usecases-icon {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .workshop-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .regional-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .dashboard-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .dashboard-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .framework-title { color: #0078d4; }
+        .usecases-title { color: #dc2626; }
+        .workshop-title { color: #10b981; }
+        .regional-title { color: #8b5cf6; }
+
+        .dashboard-desc {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .key-features {
+            margin-bottom: 25px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .tech-badge {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+        }
+
+        .view-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .framework-button {
+            background: linear-gradient(135deg, #0078d4, #106ebe);
+            color: white;
+        }
+
+        .usecases-button {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+        }
+
+        .workshop-button {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .regional-button {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+        }
+
+        .view-button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .metrics-overview {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 25px 15px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .sanctions-metric { color: #dc2626; }
+        .operations-metric { color: #0078d4; }
+        .efficiency-metric { color: #10b981; }
+
+        .metric-label {
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dashboard-card:nth-child(1) { animation-delay: 0.2s; }
+        .dashboard-card:nth-child(2) { animation-delay: 0.4s; }
+        .dashboard-card:nth-child(3) { animation-delay: 0.6s; }
+        .dashboard-card:nth-child(4) { animation-delay: 0.8s; }
+
+        @media (max-width: 768px) {
+            .dashboards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partnership-logos {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="partnership-logos">
+                <div class="logo-container">
+                    <img src="https://www.thakralone.com/wp-content/uploads/2020/08/Thakral-One-Logo.png" alt="Thakral One Logo" class="logo-img">
+                </div>
+                <div class="partnership-symbol">×</div>
+                <div class="logo-container">
+                    <img src="assets/images/orbus-software_logo.webp" alt="Orbus Software Logo" class="logo-img">
+                </div>
+                <div class="partnership-symbol">×</div>
+                <div class="logo-container">
+                    <img src="assets/images/mizuho-logo-png_seeklogo-93628.png" alt="Mizuho Bank Logo" class="logo-img">
+                </div>
+            </div>
+
+            <h1>Mizuho Bank AI Readiness Assessment</h1>
+            <p>Strategic Implementation Framework - Two-Week Discovery Workshop leveraging Thakral One's proven 8-Step AI Adoption Framework enhanced with OrbusInfinity Enterprise Architecture Visualization</p>
+        </div>
+
+        <div class="executive-summary">
+            <div class="executive-summary-content">
+                <h2 style="color: #0078d4; margin-bottom: 20px; font-size: 1.8rem;">Executive Overview</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #475569;">
+                    Mizuho Bank Southeast Asia stands at a pivotal moment in enterprise AI adoption. Building upon the <strong>AIX Promotion Office</strong> establishment and
+                    ongoing <strong>IBM watsonx operational reliability initiatives</strong>, this comprehensive framework addresses the fundamental challenge of translating
+                    corporate AI strategy into <strong>practical, implementable solutions</strong> across Singapore, Hong Kong, and India. Our approach focuses on
+                    <strong>Sanctions Screening Precision AI</strong> and <strong>IT Operations Reliability AI</strong> - two strategic applications that deliver immediate
+                    business value while establishing foundation capabilities for scalable AI adoption across sixteen countries.
+                </p>
+            </div>
+        </div>
+
+        <div class="framework-overview">
+            <h2 style="color: #10b981; margin-bottom: 20px; font-size: 1.8rem; text-align: center;">Thakral One's Proven 8-Step AI Adoption Framework</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 30px; font-size: 1.1rem;">
+                A comprehensive methodology refined through successful implementations across Asia-Pacific banking sector
+            </p>
+
+            <div class="step-grid">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Enterprise AI Strategy Alignment</div>
+                    <div class="step-desc">Establish clear connection between AI initiatives and Mizuho's business objectives including regional expansion and operational excellence.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-title">AI Maturity Assessment & Ladder</div>
+                    <div class="step-desc">Evaluate current capabilities across IT organization, building upon existing AIX Office initiatives and IBM watsonx experience.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-title">AI Technology & Data Foundations</div>
+                    <div class="step-desc">Leverage existing Google Cloud relationship and enterprise data infrastructure for optimal AI integration points.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-title">AI Governance Framework</div>
+                    <div class="step-desc">Build upon Mizuho's operational resilience commitment with policies enabling innovation while maintaining banking regulatory requirements.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-title">AI Prototype-Driven Use Cases</div>
+                    <div class="step-desc">Focus on sanctions screening precision and operational reliability using synthetic data and controlled environments.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-title">Embedding Meaningful AI</div>
+                    <div class="step-desc">Provide roadmap for scaling successful prototypes into production with appropriate integration into existing banking systems.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">7</div>
+                    <div class="step-title">AI Human Factors</div>
+                    <div class="step-desc">Ensure successful adoption through change management, skills development, and cultural integration with focus on trust and explainability.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">8</div>
+                    <div class="step-title">AI Continuous Innovation</div>
+                    <div class="step-desc">Establish sustainable mechanisms for ongoing AI evolution and regional AI center of excellence for Mizuho's global expansion.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics-overview">
+            <h2 style="color: #1e293b; margin-bottom: 15px; font-size: 1.8rem; text-align: center;">Expected Business Outcomes</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 30px;">Industry-validated metrics from regional banking implementations</p>
+
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-value sanctions-metric">70-85%</div>
+                    <div class="metric-label">False Positive<br>Reduction</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value operations-metric">40-60%</div>
+                    <div class="metric-label">Anomaly Detection<br>Improvement</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value efficiency-metric">30-50%</div>
+                    <div class="metric-label">Incident Resolution<br>Time Reduction</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value sanctions-metric">95%</div>
+                    <div class="metric-label">Audit Trail<br>Transparency</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value operations-metric">20-30%</div>
+                    <div class="metric-label">Proactive Issue<br>Prevention</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value efficiency-metric">2 Weeks</div>
+                    <div class="metric-label">Discovery Workshop<br>Timeline</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboards-grid">
+            <div class="dashboard-card framework-card" onclick="navigateTo('dashboards/framework-visualization.html')">
+                <div class="dashboard-icon framework-icon">
+                    🏗️
+                </div>
+                <div class="dashboard-title framework-title">
+                    Interactive 8-Step Framework
+                </div>
+                <div class="dashboard-desc">
+                    Comprehensive visualization of Thakral One's proven AI adoption methodology with interactive step-by-step progression, timeline visualization, and alignment to Mizuho's strategic objectives and existing investments.
+                </div>
+                <div class="key-features">
+                    <strong style="color: #0078d4;">Framework Features:</strong>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #0078d4;">✓</div>
+                            8-Step Methodology
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #0078d4;">✓</div>
+                            Interactive Timeline
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #0078d4;">✓</div>
+                            Progress Tracking
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #0078d4;">✓</div>
+                            Deliverable Mapping
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">AI Strategy</span>
+                    <span class="tech-badge">Maturity Assessment</span>
+                    <span class="tech-badge">Governance Framework</span>
+                    <span class="tech-badge">Change Management</span>
+                </div>
+                <div class="view-button framework-button">
+                    Explore 8-Step Framework →
+                </div>
+            </div>
+
+            <div class="dashboard-card usecases-card" onclick="navigateTo('dashboards/mizuho-use-cases.html')">
+                <div class="dashboard-icon usecases-icon">
+                    🎯
+                </div>
+                <div class="dashboard-title usecases-title">
+                    Mizuho Strategic Use Cases
+                </div>
+                <div class="dashboard-desc">
+                    Deep-dive into Sanctions Screening Precision AI and IT Operations Reliability AI applications. Interactive demonstrations using synthetic data, showcasing business impact, technical feasibility, and regulatory compliance alignment.
+                </div>
+                <div class="key-features">
+                    <strong style="color: #dc2626;">Core Applications:</strong>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #dc2626;">✓</div>
+                            Sanctions Screening AI
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #dc2626;">✓</div>
+                            Operations Reliability AI
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #dc2626;">✓</div>
+                            Synthetic Data Demos
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #dc2626;">✓</div>
+                            ROI Calculations
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">Compliance AI</span>
+                    <span class="tech-badge">Operational Intelligence</span>
+                    <span class="tech-badge">Anomaly Detection</span>
+                    <span class="tech-badge">Risk Management</span>
+                </div>
+                <div class="view-button usecases-button">
+                    Explore Use Cases →
+                </div>
+            </div>
+
+            <div class="dashboard-card workshop-card" onclick="navigateTo('dashboards/two-week-discovery.html')">
+                <div class="dashboard-icon workshop-icon">
+                    📅
+                </div>
+                <div class="dashboard-title workshop-title">
+                    Two-Week Discovery Workshop
+                </div>
+                <div class="dashboard-desc">
+                    Interactive timeline and methodology for the comprehensive discovery engagement. Day-by-day breakdown integrating stakeholder alignment, team assessments, OrbusInfinity visualization, and prototype development with clear deliverables.
+                </div>
+                <div class="key-features">
+                    <strong style="color: #10b981;">Workshop Structure:</strong>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #10b981;">✓</div>
+                            Week 1: Discovery & Assessment
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #10b981;">✓</div>
+                            Week 2: Visualization & Prototypes
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #10b981;">✓</div>
+                            OrbusInfinity Integration
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #10b981;">✓</div>
+                            Stakeholder Engagement
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">Discovery Methodology</span>
+                    <span class="tech-badge">Stakeholder Alignment</span>
+                    <span class="tech-badge">Prototype Development</span>
+                    <span class="tech-badge">Enterprise Architecture</span>
+                </div>
+                <div class="view-button workshop-button">
+                    View Workshop Timeline →
+                </div>
+            </div>
+
+            <div class="dashboard-card regional-card" onclick="navigateTo('dashboards/regional-expansion.html')">
+                <div class="dashboard-icon regional-icon">
+                    🌏
+                </div>
+                <div class="dashboard-title regional-title">
+                    Regional Expansion Strategy
+                </div>
+                <div class="dashboard-desc">
+                    Strategic roadmap for AI implementation across Singapore → Hong Kong → India expansion. Regulatory compliance frameworks, data residency considerations, and governance structures for multi-jurisdictional deployment.
+                </div>
+                <div class="key-features">
+                    <strong style="color: #8b5cf6;">Regional Focus:</strong>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #8b5cf6;">✓</div>
+                            Singapore Hub
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #8b5cf6;">✓</div>
+                            Hong Kong Expansion
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #8b5cf6;">✓</div>
+                            India Growth Strategy
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background: #8b5cf6;">✓</div>
+                            Regulatory Mapping
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">MAS Compliance</span>
+                    <span class="tech-badge">HKMA Standards</span>
+                    <span class="tech-badge">RBI Regulations</span>
+                    <span class="tech-badge">Cross-Border Governance</span>
+                </div>
+                <div class="view-button regional-button">
+                    Explore Regional Strategy →
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-content">
+                <h3 style="color: #1e293b; margin-bottom: 20px; font-size: 1.8rem;">Strategic Partnership Value</h3>
+                <p style="color: #64748b; line-height: 1.8; font-size: 1.1rem; margin-bottom: 25px;">
+                    This AI transformation framework demonstrates the strategic value of combining <strong>Thakral One's deep Southeast Asian banking expertise</strong>
+                    with <strong>OrbusInfinity's advanced enterprise architecture visualization capabilities</strong>. The governance-first approach ensures sustainable adoption
+                    that supports rather than complicates existing operational excellence and regulatory compliance commitments while positioning Mizuho as a
+                    <strong>regional AI innovation leader</strong>.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #0078d4;">8-Step Framework</div>
+                        <div style="font-size: 0.9rem; color: #64748b;">Proven Methodology</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #dc2626;">2 Strategic Use Cases</div>
+                        <div style="font-size: 0.9rem; color: #64748b;">Immediate Impact</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;">Multi-Jurisdictional</div>
+                        <div style="font-size: 0.9rem; color: #64748b;">Regional Scalability</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            console.log(`Navigating to: ${page}`);
+            window.location.href = page;
+        }
+
+        // Enhanced animation system
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.dashboard-card, .executive-summary, .metrics-overview, .framework-overview').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            observer.observe(element);
+        });
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.dashboard-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 25px 60px rgba(0,0,0,0.2)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 12px 35px rgba(0,0,0,0.1)';
+            });
+
+            card.addEventListener('click', function(e) {
+                const onClick = this.getAttribute('onclick');
+                if (onClick) {
+                    // Add click animation
+                    this.style.transform = 'translateY(-5px) scale(0.98)';
+
+                    // Execute the onclick after animation
+                    setTimeout(() => {
+                        eval(onClick);
+                    }, 200);
+                }
+            });
+        });
+
+        // Animate metrics on scroll
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const metricValue = entry.target.querySelector('.metric-value');
+                    const finalValue = metricValue.textContent;
+
+                    // Animate number counting for metrics with numbers
+                    if (finalValue.includes('%') || finalValue.includes('-')) {
+                        let currentValue = 0;
+                        const targetValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                        const increment = targetValue / 50;
+                        const suffix = finalValue.replace(/[\d]/g, '');
+
+                        const counter = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= targetValue) {
+                                metricValue.textContent = finalValue;
+                                clearInterval(counter);
+                            } else {
+                                metricValue.textContent = Math.floor(currentValue) + suffix;
+                            }
+                        }, 30);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-item').forEach(item => {
+            metricsObserver.observe(item);
+        });
+
+        // Add step item hover effects
+        document.querySelectorAll('.step-item').forEach(step => {
+            step.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            });
+
+            step.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
