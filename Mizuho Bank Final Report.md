@@ -151,19 +151,21 @@ The strategy begins with a pilot in Singapore, leveraging its advanced digital i
 | System Reliability | Mean Time to Resolution | **30-50%** ↓ |
 | Incident Prevention | Recurring Incidents | **25-35%** ↓ |
 
-## 9.0 Differentiation vs Competitors
+## 9.0 Differentiation
 
-Global firms often emphasise scale and technology pilots. Our differentiation lies in delivering **strategic, sustainable AI adoption** for regulated industries:
+Thakral One provides strategic, sustainable AI adoption tailored to regulated banking environments:
 
-• **Structured Framework** – Thakral One's 8-Step AI Adoption Framework embeds governance, explainability, MLOps, and risk management from the first POC.
+• **Structured Framework** – Our 8-Step AI Adoption Framework embeds governance, explainability, MLOps, and risk management from the very first POC.
 
-• **Banking & FSI Expertise** – We bring deep knowledge of core banking, regulatory reporting, and compliance workflows to identify practical, regulator-friendly use cases.
+• **Banking & FSI Expertise** – Deep knowledge of core banking, compliance, and regulatory reporting ensures relevance and impact.
 
-• **Real AI Investments** – Our partnerships with Microsoft (Fabric), SAS Viya, Nvidia/HPE, and Sunline demonstrate ongoing investment in AI ecosystems – giving us both credibility and access to innovation accelerators.
+• **Real AI Investments** – We apply AI in our own organisation — from HR analytics to project governance and helpdesk optimisation — proving that we deliver what we practice.
 
-• **Neutral Advisory** – We remain vendor-neutral, helping banks build their own intellectual property and retain control over their AI journey.
+• **Neutral Advisory** – We are vendor-agnostic, helping you build bank-owned intellectual property rather than pushing external platforms.
 
-• **Regional Relevance** – We specialise in Southeast Asia, where regulatory expectations, infrastructure maturity, and talent availability differ from global markets. Our solutions are designed for these realities.
+• **Regional Relevance** – Our focus on Southeast Asia ensures solutions are adapted to regional regulations, infrastructure realities, and talent dynamics.
+
+This makes Thakral One a differentiated partner: not just delivering a proof of concept, but enabling a disciplined, regulator-ready, and production-scalable AI adoption journey.
 
 ## 10.0 Important Disclaimers & Caveats
 
